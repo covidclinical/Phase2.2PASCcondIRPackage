@@ -1,0 +1,23 @@
+Package: Phase2.2PASCcondIRPackage
+Title: PASC Conditional Independence Testing
+Version: 0.1.0
+Authors@R: c(
+    person("Clara-Lea", "Bonzel", role = c("aut", "cre"), email = "clbonzel@hsph.harvard.edu"),
+    person("Tianxi", "Cai", role = "aut"),
+    person("Harrison", "Zhang", role = "aut")
+    )
+Description: This package implements conditional independence testing procedures to identify codified concepts related to prior exposure to SARS-CoV-2 in 4CE Phase2.2 Data.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+  caret,
+  data.table,
+  e1071,
+  gbm,
+  nnet,
+  plyr,
+  randomForest
+RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)

@@ -1,28 +1,31 @@
-PASC Conditional Independence Testing
-================
+---
+title: "PASC Conditional Independence Testing"
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package implements conditional independence testing procedures to
-identify codified concepts related to prior exposure to SARS-CoV-2 in
-4CE Phase2.2 Data. Running this package necessitates Phase2.2 data and
-membership to the 4CE Consortium.
+This package implements conditional independence testing procedures to identify codified concepts related to prior exposure to SARS-CoV-2 in 4CE Phase2.2 Data. Running this package necessitates Phase2.2 data and membership to the 4CE Consortium.
 
-4CE analysts at each participating healthcare system can follow the
-steps described bellow to run the analysis locally, using their
-healthcare system’s 2.2 data. The summarized results are then shared and
-combined with those obtained from other healthcare systems. Those
-phenotype conditional testing results regroup PheCode, beta coefficient,
-standard errors, p-values, and prevalence estimates.
+4CE analysts at each participating healthcare system can follow the steps described bellow to run the analysis locally, using their healthcare system's 2.2 data. The summarized results are then shared and combined with those obtained from other healthcare systems. Those phenotype conditional testing results regroup PheCode, beta coefficient, standard errors, p-values, and prevalence estimates.
 
 ### 1. Install the package
 
-Install the development version of **Phase2.2PASCcondIRPackage** from
-GitHub using remotes:
-
-``` r
+Install the development version of **Phase2.2PASCcondIRPackage** from GitHub using remotes:
+```{r install, eval = F}
 remotes::install_github('covidclinical/Phase2.2PASCcondIRPackage',
                         upgrade = FALSE)
 library(Phase2.2PASCcondIRPackage)
@@ -30,10 +33,8 @@ library(Phase2.2PASCcondIRPackage)
 
 ### 2. Run the Analysis
 
-Please note that the analysis usually takes around 15 to 30 minutes to
-run.
-
-``` r
+Please note that the analysis usually takes around 15 to 30 minutes to run.
+```{r run, eval = F}
 siteid=""     # specify the site ID (capital letters)
 dir.data=""   # specify the 2.2 data directory
 dir.repo=""   # specify the directory to save the results 
@@ -50,17 +51,18 @@ runAnalysis()
 
 <!-- #### 1. Submit the results via GitHub -->
 <!-- Finally, please submit the results to [Phase2.2PASCcondISummariesPublic](https://github.com/covidclinical/Phase2.2PASCcondISummariesPublic): -->
+
 <!-- - Share your GitHub handle with @Clara-Lea via direct message so you can be added as contributor to the repository. -->
 <!-- - Note that you will need to use a token to access **private** repositories. Please see the details [here](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). -->
 <!-- To generate a new token, go to your GitHub settings -> Developer settings -> Personal access tokens -> Generate. -->
+
 <!-- Then, run the following: -->
+
 <!-- ```{r, eval=FALSE} -->
 <!-- submitAnalysis() -->
 <!-- ``` -->
-<!-- #### 2. Alternatively, you can submit the results via Slack.  -->
 
-Your results will be saved under the path that you specify in
-`dir.repo`, as an .Rdata file. Please share the results with @Harrison
-and @Clara-Lea via the Slack channel #post-acute-sequelae.
+<!-- #### 2. Alternatively, you can submit the results via Slack.  -->
+Your results will be saved under the path that you specify in `dir.repo`, as an .Rdata file. Please share the results with @Harrison and @Clara-Lea via the Slack channel #post-acute-sequelae.
 
 Thank you very much for your contribution!
