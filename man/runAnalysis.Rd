@@ -4,7 +4,12 @@
 \alias{runAnalysis}
 \title{Run analysis}
 \usage{
-runAnalysis()
+runAnalysis(dir.data, dir.repo)
+}
+\arguments{
+\item{dir.data}{path of input data (string)}
+
+\item{dir.repo}{path of output data (string)}
 }
 \value{
 NULL. Result files are written out to the \code{conditional_testing_results} directory.

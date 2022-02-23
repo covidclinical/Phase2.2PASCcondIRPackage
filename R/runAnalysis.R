@@ -4,6 +4,8 @@
 #'
 #' @keywords 4CE
 #' @export
+#' @param dir.data path of input data (string)
+#' @param dir.repo path of output data (string)
 #' @import data.table
 #' @import caret
 #' @import randomForest
@@ -13,10 +15,14 @@
 #' @import nnet
 #' @import stats
 #'
-runAnalysis <- function(){
+runAnalysis <- function(dir.data, dir.repo){
+
+  # read the data
+  obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
+  summary = fread(paste0(dir.data,"Phase22all_LocalPatientSummary.csv"),stringsAsFactors = F)
+
   ### phecode mapping
   #load(sysdata)
-
   ### Construct phenotype data (takes 15-30 minutes)
   construct_conditional_matrix(dir.repo,
                                siteid,

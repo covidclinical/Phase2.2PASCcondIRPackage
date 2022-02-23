@@ -3,10 +3,10 @@ construct_conditional_matrix = function(dir.repo,
                                         obs,
                                         summary){
 
-#icd10.phecode.map = Phase2.2PASCcondIRPackage:::icd10.phecode.map
+icd10.phecode.map = Phase2.2PASCcondIRPackage:::icd10.phecode.map
 ### PheCode mapping
 dat.icd=filter(obs,concept_type=="DIAG-ICD10")
-dat.icd=left_join(dat.icd,icd10.phecode.map[,c("concept_code","phecode")],
+dat.icd=left_join(dat.icd, icd10.phecode.map[,c("concept_code","phecode")],
               by="concept_code")
 dat.icd=filter(dat.icd,!is.na(dat.icd$phecode))
 pat.rm=table(dat.icd$patient_num)
