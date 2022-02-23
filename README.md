@@ -30,7 +30,7 @@ library(Phase2.2PASCcondIRPackage)
 
 ### 2. Run the Analysis
 
-Please note that the analysis usually takes around 15 to 30 minutes to
+Please note that the analysis usually takes around 2 to 3 days to
 run.
 
 ``` r
