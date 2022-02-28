@@ -21,7 +21,7 @@ standard errors, p-values, and prevalence estimates.
 ### 1. Install the package
 
 Install the development version of **Phase2.2PASCcondIRPackage** from
-GitHub using remotes:
+GitHub using remotes by running the code in your R console below:
 
 ``` r
 remotes::install_github('covidclinical/Phase2.2PASCcondIRPackage',
@@ -31,8 +31,9 @@ library(Phase2.2PASCcondIRPackage)
 
 ### 2. Run the Analysis
 
-Please note that the analysis usually takes around 2 to 3 days to
-run.
+Please note that the analysis may take 2-3 days to
+complete. To start the analysis, define the following 3 variables below
+in your R console. "siteid" must be in all capital letters. 
 
 ``` r
 siteid=""     # specify the site ID (capital letters)
