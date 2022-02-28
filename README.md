@@ -30,20 +30,15 @@ library(Phase2.2PASCcondIRPackage)
 
 ### 2. Run the Analysis
 
-Please note that the analysis usually takes around 2 to 3 days to
-run.
+Please note that the analysis can take up to two days to run.
 
 ``` r
 siteid=""     # specify the site ID (capital letters)
-dir.data=""   # specify the 2.2 data directory
-dir.repo=""   # specify the directory to save the results 
-
-# read the data
-obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
-summary = fread(paste0(dir.data,"Phase22all_LocalPatientSummary.csv"),stringsAsFactors = F)
+dir.data=""   # specify the input data directory, where the phase 2.2 data is saved
+dir.repo=""   # specify the output data directory, where the results will be saved
 
 # run the analysis
-runAnalysis()
+runAnalysis(dir.data, dir.repo)
 ```
 
 ### 3. Submit the results
