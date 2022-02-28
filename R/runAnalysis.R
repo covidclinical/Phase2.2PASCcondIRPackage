@@ -16,6 +16,7 @@
 #' @import stats
 #' @import metafor
 #' @import poolr
+#' @import dplyr
 #'
 runAnalysis <- function(dir.data, dir.repo){
 
