@@ -14,8 +14,13 @@
 #' @import plyr
 #' @import nnet
 #' @import stats
+#' @import metafor
+#' @import poolr
 #'
 runAnalysis <- function(dir.data, dir.repo){
+
+  # create output result folder
+  dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
 
   # read the data
   obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
@@ -36,39 +41,27 @@ runAnalysis <- function(dir.data, dir.repo){
   colnames(comorbid)=c("250.2","278.1","401")
   output = as.list(NULL)
 
-  ### 90 days testing
-  for(tt in 1:3){
-    for(aa in 1:3){
-      for(cc in 1:nrow(comorbid)){
-        print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_90"))
-        output[[paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_90")]]=conditional_testing(summary.dcrt,
-                                                                                         tt,
-                                                                                         aa,
-                                                                                         cc,
-                                                                                         time.period=90,
-                                                                                         comorbid)
-      }
-    }
-  }
+  prevalence_main(comorbid,
+                summary.dcrt,
+                siteid,
+                dir.repo)
 
-  ### 180 days testing
-  for(tt in 1:3){
-    for(aa in 1:3){
-      for(cc in 1:nrow(comorbid)){
-        print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_180"))
-        output[[paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_180")]]=conditional_testing(summary.dcrt,
-                                                                                          tt,
-                                                                                          aa,
-                                                                                          cc,
-                                                                                          time.period=180,
-                                                                                          comorbid)
-      }
-    }
-  }
+  phecode.pass=prescreen(comorbid,
+                       summary.dcrt,
+                       siteid,
+                       dir.repo)
+
+  phecode.pass.dCRT=conditional_testing_dCRT(comorbid,
+                                           summary.dcrt,
+                                           siteid,
+                                           dir.repo,
+                                           phecode.pass)
+
+  conditional_testing_DML(comorbid,
+                        summary.dcrt,
+                        siteid,
+                        dir.repo,
+                        phecode.pass.dCRT)
 
 
-  dir.create(paste0(dir.repo,Sys.Date(),"_",siteid,"_conditional_testing_results"))
-
-  save(output,
-       file=paste0(dir.repo,Sys.Date(),"_",siteid,"_conditional_testing_results/",siteid,"_conditional_testing_output.Rdata"))
 }
