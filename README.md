@@ -7,14 +7,15 @@ PASC Conditional Independence Testing
 
 This package implements conditional independence testing procedures to
 identify codified concepts related to prior exposure to SARS-CoV-2 in
-4CE Phase2.2 Data. Running this package necessitates Phase2.2 data and
-membership to the 4CE Consortium.
+4CE Phase2.2 Data. Running this package necessitates refreshed Phase2.2 
+data to Feb 1, 2022 inclusive of all patient cohorts and membership in 
+the 4CE Consortium.
 
 4CE analysts at each participating healthcare system can follow the
 steps described bellow to run the analysis locally, using their
 healthcare system’s 2.2 data. The summarized results are then shared and
 combined with those obtained from other healthcare systems. Those
-phenotype conditional testing results regroup PheCode, beta coefficient,
+phenotype conditional testing results shared include PheCode, beta coefficient,
 standard errors, p-values, and prevalence estimates.
 
 ### 1. Install the package
