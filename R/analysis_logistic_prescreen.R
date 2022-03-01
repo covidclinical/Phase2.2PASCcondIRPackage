@@ -1,3 +1,5 @@
+### Libraries needed: dplyr, stats
+
 logistic_prescreen = function(summary.dcrt,
                                tt,
                                aa,
