@@ -1,4 +1,7 @@
-   prevalence = function(summary.dcrt,
+### Libraries needed: dplyr   
+
+
+prevalence = function(summary.dcrt,
                          tt,
                          aa,
                          cc,
