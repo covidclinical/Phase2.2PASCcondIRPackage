@@ -1,3 +1,5 @@
+### Libraries needed: caret
+
 #Split 1:input into K sets
 #randomly split the n samples into K folds
 #The function is use for cross-fitting
