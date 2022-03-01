@@ -8,13 +8,14 @@ PASC Conditional Independence Testing
 This package implements conditional independence testing procedures to
 identify codified concepts related to prior exposure to SARS-CoV-2 in
 4CE Phase2.2 Data. Running this package necessitates refreshed Phase2.2
-data to Feb 1, 2022 inclusive of all patient cohorts the 4CE Consortium.
+data to Feb 1, 2022 inclusive of all patient cohorts and 
+membership in the 4CE Consortium.
 
 4CE analysts at each participating healthcare system can follow the
-steps described bellow to run the analysis locally, using their
-healthcare system’s 2.2 data. The summarized results are then shared and
-combined with those obtained from other healthcare systems. Those
-phenotype conditional testing results regroup PheCode, beta coefficient,
+steps described below to run the analysis locally, using their
+healthcare system’s Phase 2.2 data. The summarized results are then shared and
+combined with those obtained from other healthcare systems. Results shared
+include PheCodes, beta coefficients,
 standard errors, p-values, and prevalence estimates.
 
 ### 1. Install the package
@@ -54,8 +55,9 @@ runAnalysis(dir.data, dir.repo)
 <!-- ``` -->
 <!-- #### 2. Alternatively, you can submit the results via Slack.  -->
 
-Your results will be saved under the path that you specify in
-`dir.repo`, as an .Rdata file. Please share the results with @Harrison
-and @Clara-Lea via the Slack channel #post-acute-sequelae.
+Your results will be saved into a folder called 
+"SITEID_conditional_testing_results" under the path that
+you specify in `dir.repo`. Please share the results with @Harrison
+and @Clara-Lea privately over the 4CE Consortium Slack. 
 
 Thank you very much for your contribution!
