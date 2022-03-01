@@ -1,3 +1,5 @@
+### Libraries needed: dplyr, metafor, poolr
+
 logistic_meta=function(res){
   
   phecode.keep=table(res$phecode)
