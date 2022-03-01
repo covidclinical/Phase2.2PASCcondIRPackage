@@ -6,18 +6,17 @@
 #' @export
 #' @param dir.data path of input data (string)
 #' @param dir.repo path of output data (string)
+#' @import tidyverse
 #' @import data.table
 #' @import caret
 #' @import randomForest
 #' @import e1071
-#' @import gbm
-#' @import plyr
-#' @import nnet
+#' @import glmnet
 #' @import stats
 #' @import metafor
 #' @import poolr
-#' @import dplyr
 #'
+
 runAnalysis <- function(dir.data, dir.repo){
 
   # create output result folder
@@ -43,26 +42,26 @@ runAnalysis <- function(dir.data, dir.repo){
   output = as.list(NULL)
 
   prevalence_main(comorbid,
-                summary.dcrt,
-                siteid,
-                dir.repo)
+                  summary.dcrt,
+                  siteid,
+                  dir.repo)
 
   phecode.pass=prescreen(comorbid,
-                       summary.dcrt,
-                       siteid,
-                       dir.repo)
+                         summary.dcrt,
+                         siteid,
+                         dir.repo)
 
   phecode.pass.dCRT=conditional_testing_dCRT(comorbid,
-                                           summary.dcrt,
-                                           siteid,
-                                           dir.repo,
-                                           phecode.pass)
+                                             summary.dcrt,
+                                             siteid,
+                                             dir.repo,
+                                             phecode.pass)
 
   conditional_testing_DML(comorbid,
-                        summary.dcrt,
-                        siteid,
-                        dir.repo,
-                        phecode.pass.dCRT)
+                          summary.dcrt,
+                          siteid,
+                          dir.repo,
+                          phecode.pass.dCRT)
 
 
 }
