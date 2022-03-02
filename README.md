@@ -39,7 +39,7 @@ dir.data=""   # specify the input data directory, where the phase 2.2 data is sa
 dir.repo=""   # specify the output data directory, where the results will be saved
 
 # run the analysis
-runAnalysis(dir.data, dir.repo)
+runAnalysis(dir.data, dir.repo, TRUE)
 ```
 
 ### 3. Submit the results
