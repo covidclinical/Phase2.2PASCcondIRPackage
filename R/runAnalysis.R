@@ -17,7 +17,7 @@
 #' @import poolr
 #'
 
-runAnalysis <- function(dir.data, dir.repo){
+runAnalysis <- function(dir.data, dir.repo,shorten){
 
   # create output result folder
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
@@ -56,12 +56,13 @@ runAnalysis <- function(dir.data, dir.repo){
                                              siteid,
                                              dir.repo,
                                              phecode.pass)
-
+  if(shorten==FALSE){
   conditional_testing_DML(comorbid,
                           summary.dcrt,
                           siteid,
                           dir.repo,
                           phecode.pass.dCRT)
-
+    
+}
 
 }
