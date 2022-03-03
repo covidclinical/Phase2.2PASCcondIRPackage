@@ -1,3 +1,4 @@
+#' @import dplyr
 construct_conditional_matrix = function(dir.repo,
                                         siteid,
                                         obs,
