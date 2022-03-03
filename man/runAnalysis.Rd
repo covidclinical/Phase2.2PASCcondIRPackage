@@ -4,7 +4,7 @@
 \alias{runAnalysis}
 \title{Run analysis}
 \usage{
-runAnalysis(dir.data, dir.repo)
+runAnalysis(dir.data, dir.repo, run.DML)
 }
 \arguments{
 \item{dir.data}{path of input data (string)}
