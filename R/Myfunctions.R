@@ -11,7 +11,7 @@
 #' @import glmnet
 #' @import dplyr
 #' @import randomForest
-#' @import e107
+#' @import e1071
 dCRT<-function(A, Z, X, mean_Z,
                Gen_Z = NULL,
                model = 'Binomial_lasso', k = NULL, M = 5000, RF.num.trees = c(100, 30),

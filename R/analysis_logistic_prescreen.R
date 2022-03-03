@@ -1,5 +1,5 @@
 #' @import dplyr
-#' @import stats
+#' @importFrom stats glm as.formula p.adjust predict quantile rbinom rnorm sd uniroot
 logistic_prescreen = function(summary.dcrt,
                               tt,
                               aa,

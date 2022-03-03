@@ -6,17 +6,9 @@
 #' @export
 #' @param dir.data path of input data (string)
 #' @param dir.repo path of output data (string)
-#' @import tidyverse
+#' @param run.DML model to run, TRUE by default
 #' @import data.table
-#' @import caret
-#' @import randomForest
-#' @import e1071
-#' @import glmnet
-#' @import stats
-#' @import metafor
-#' @import poolr
-#'
-runAnalysis <- function(dir.data, dir.repo,run.DML){
+runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   # create output result folder
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
