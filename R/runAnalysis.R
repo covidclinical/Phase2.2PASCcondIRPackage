@@ -6,18 +6,9 @@
 #' @export
 #' @param dir.data path of input data (string)
 #' @param dir.repo path of output data (string)
-#' @import tidyverse
+#' @param run.DML model to run, TRUE by default
 #' @import data.table
-#' @import caret
-#' @import randomForest
-#' @import e1071
-#' @import glmnet
-#' @import stats
-#' @import metafor
-#' @import poolr
-#'
-
-runAnalysis <- function(dir.data, dir.repo){
+runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   # create output result folder
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
@@ -56,12 +47,24 @@ runAnalysis <- function(dir.data, dir.repo){
                                              siteid,
                                              dir.repo,
                                              phecode.pass)
+  if(run.DML==TRUE){
+    conditional_testing_DML(comorbid,
+                            summary.dcrt,
+                            siteid,
+                            dir.repo,
+                            phecode.pass.dCRT)
 
-  conditional_testing_DML(comorbid,
-                          summary.dcrt,
-                          siteid,
-                          dir.repo,
-                          phecode.pass.dCRT)
+  }
+
+  res.conf.final=NULL
+  res.out.180.final=NULL
+  res.out.90.final=NULL
+  summary.dcrt=NULL
+  save(res.conf.final,
+       res.out.180.final,
+       res.out.90.final,
+       summary.dcrt,
+       file=paste0(dir.repo,siteid,"_conditional_testing_data_phase22.Rdata"))
 
 
 }
