@@ -132,6 +132,6 @@ prevalence = function(summary.dcrt,
                           prev)
 
     return(prev)
-  }
+  }else{print("Sample size is too small")}
 
 }
