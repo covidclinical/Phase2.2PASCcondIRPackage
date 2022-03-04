@@ -6,7 +6,7 @@ construct_conditional_matrix = function(dir.repo,
 
   ### PheCode mapping
   dat.icd=filter(obs,concept_type=="DIAG-ICD10")
-  dat.icd=left_join(dat.icd,icd10.phecode.map[,c("concept_code","phecode")],
+  dat.icd=left_join(dat.icd, icd10.phecode.map[,c("concept_code","phecode")],
                     by="concept_code")
   dat.icd=filter(dat.icd,!is.na(dat.icd$phecode))
   pat.rm=table(dat.icd$patient_num)
@@ -55,9 +55,18 @@ construct_conditional_matrix = function(dir.repo,
     summarize("util"=sum(count))
   xx=as.numeric(log(1+health_util$util))
   health_util[,"util"]=xx
-  health_util=rbind.data.frame(health_util,
-                               cbind.data.frame("patient_num"=rownames(res.conf.final)[!(rownames(res.conf.final) %in% health_util$patient_num)],
-                                                "util"=0))
+  ##### BUG HERE
+  # health_util=rbind.data.frame(health_util,
+  #                              cbind.data.frame("patient_num"=rownames(res.conf.final)[!(rownames(res.conf.final) %in% health_util$patient_num)],
+  #                                             "util"=0))
+  #####
+  if(all((rownames(res.conf.final) %in% health_util$patient_num)>0)!=T){
+    health_util=rbind.data.frame(health_util,
+                                 cbind.data.frame("patient_num"=rownames(res.conf.final)[!(rownames(res.conf.final) %in% health_util$patient_num)],
+                                                  "util"=0))
+
+  }
+
   health_util=as.data.frame(health_util)
   rownames(health_util)=health_util$patient_num
   health_util=health_util[rownames(res.conf.final),]
