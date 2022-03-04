@@ -56,4 +56,15 @@ runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   }
 
+  res.conf.final=NULL
+  res.out.180.final=NULL
+  res.out.90.final=NULL
+  summary.dcrt=NULL
+  save(res.conf.final,
+       res.out.180.final,
+       res.out.90.final,
+       summary.dcrt,
+       file=paste0(dir.repo,siteid,"_conditional_testing_data_phase22.Rdata"))
+
+
 }
