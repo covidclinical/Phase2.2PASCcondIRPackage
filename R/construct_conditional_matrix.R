@@ -5,13 +5,13 @@ construct_conditional_matrix = function(dir.repo,
                                         summary){
 
   ### PheCode mapping
-  dat.icd=filter(obs,concept_type=="DIAG-ICD10")
+  dat.icd=dplyr::filter(obs,concept_type=="DIAG-ICD10")
   dat.icd=left_join(dat.icd, icd10.phecode.map[,c("concept_code","phecode")],
                     by="concept_code")
-  dat.icd=filter(dat.icd,!is.na(dat.icd$phecode))
+  dat.icd=dplyr::filter(dat.icd,!is.na(dat.icd$phecode))
   pat.rm=table(dat.icd$patient_num)
   pat.rm=pat.rm[pat.rm<=10]
-  dat.icd=filter(dat.icd,!(patient_num %in% names(pat.rm)))
+  dat.icd=dplyr::filter(dat.icd,!(patient_num %in% names(pat.rm)))
   patients.keep=as.character(unique(dat.icd$patient_num))
   # pat.rm=table(dat.icd$patient_num[dat.icd$days_since_admission<0])
   # pat.rm=pat.rm[pat.rm<=5]
@@ -20,8 +20,8 @@ construct_conditional_matrix = function(dir.repo,
   ### Create data matrices
 
   ### Confounding matrix X
-  icd.tmp=filter(dat.icd,days_since_admission<0)
-  icd.tmp=select(icd.tmp,patient_num,phecode)
+  icd.tmp=dplyr::filter(dat.icd,days_since_admission<0)
+  icd.tmp=dplyr::select(icd.tmp,patient_num,phecode)
   icd.tmp=icd.tmp[!duplicated(icd.tmp),]
   icd.tmp$patient_num=as.character(icd.tmp$patient_num)
   icd.tmp$phecode=as.character(icd.tmp$phecode)
@@ -48,11 +48,11 @@ construct_conditional_matrix = function(dir.repo,
   colnames(junk)=colnames(res.conf.final)
   res.conf.final=rbind(res.conf.final,junk)
   health_util = obs %>%
-    filter(days_since_admission<0) %>%
-    select(patient_num) %>%
-    mutate("count"=as.numeric(1)) %>%
-    group_by(patient_num) %>%
-    summarize("util"=sum(count))
+    dplyr::filter(days_since_admission<0) %>%
+    dplyr::select(patient_num) %>%
+    dplyr::mutate("count"=as.numeric(1)) %>%
+    dplyr::group_by(patient_num) %>%
+    dplyr::summarize("util"=sum(count))
   xx=as.numeric(log(1+health_util$util))
   health_util[,"util"]=xx
   ##### BUG HERE
@@ -79,8 +79,8 @@ construct_conditional_matrix = function(dir.repo,
   #res.conf.final=as.matrix(res.conf.final)
 
   ### Outcomes Matrix Z 90 days
-  icd.tmp=filter(dat.icd,days_since_admission>=90)
-  icd.tmp=select(icd.tmp,patient_num,phecode)
+  icd.tmp=dplyr::filter(dat.icd,days_since_admission>=90)
+  icd.tmp=dplyr::select(icd.tmp,patient_num,phecode)
   icd.tmp=icd.tmp[!duplicated(icd.tmp),]
   icd.tmp$patient_num=as.character(icd.tmp$patient_num)
   icd.tmp$phecode=as.character(icd.tmp$phecode)
@@ -104,8 +104,8 @@ construct_conditional_matrix = function(dir.repo,
 
 
   ### Outcomes Matrix Z 180 days
-  icd.tmp=filter(dat.icd,days_since_admission>=180)
-  icd.tmp=select(icd.tmp,patient_num,phecode)
+  icd.tmp=dplyr::filter(dat.icd,days_since_admission>=180)
+  icd.tmp=dplyr::select(icd.tmp,patient_num,phecode)
   icd.tmp=icd.tmp[!duplicated(icd.tmp),]
   icd.tmp$patient_num=as.character(icd.tmp$patient_num)
   icd.tmp$phecode=as.character(icd.tmp$phecode)
@@ -155,13 +155,13 @@ construct_conditional_matrix = function(dir.repo,
 
   ### Exposure vector A
   junk=obs %>%
-    filter(concept_type=="COVID-TEST",
+    dplyr::filter(concept_type=="COVID-TEST",
            concept_code=="covidpos") %>%
-    select(patient_num,concept_type,concept_code)
+    dplyr::select(patient_num,concept_type,concept_code)
   patients.keep=unique(junk$patient_num)
   exposure.tmp=ifelse(summary$patient_num %in% patients.keep,1,0)
   summary$exposure=exposure.tmp
-  summary=filter(summary,
+  summary=dplyr::filter(summary,
                  !(grepl("U07",cohort)&exposure==0))
   summary$admission_date=as.Date(summary$admission_date)
   time.period=unlist(lapply(summary$admission_date,FUN=function(ll){

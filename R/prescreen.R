@@ -2,7 +2,7 @@ prescreen=function(comorbid,
                    summary.dcrt,
                    siteid,
                    dir.repo){
-  
+
   ### Logistic prescreening
   res.logistic.prescreen=NULL
   for(tt in 1:3){
@@ -22,29 +22,29 @@ prescreen=function(comorbid,
                                                                          siteid,
                                                                          hosp))
             },error=function(e){NA})
-            
+
           }
         }
       }
     }
   }
-  
+
   save(res.logistic.prescreen,
        file=paste0(dir.repo,siteid,"_conditional_testing_results/",siteid,"_logistic_prescreen.Rdata"))
-  
+
   res.logistic.prescreen.meta=logistic_meta(res.logistic.prescreen)
-  
+
   save(res.logistic.prescreen.meta,
        file=paste0(dir.repo,siteid,"_conditional_testing_results/",siteid,"_logistic_prescreen_meta.Rdata"))
-  
+
   phecode.pass=res.logistic.prescreen.meta %>%
-    filter(PVAL_SIG==TRUE) %>%
-    select(phecode,post_period,beta,pval_adjust_BH,PVAL_SIG)
-  
+    dplyr::filter(PVAL_SIG==TRUE) %>%
+    dplyr::select(phecode,post_period,beta,pval_adjust_BH,PVAL_SIG)
+
   save(phecode.pass,
        file=paste0(dir.repo,siteid,"_conditional_testing_results/",siteid,"_phecode_pass.Rdata"))
-  
+
   return(phecode.pass)
-  
-  
+
+
 }

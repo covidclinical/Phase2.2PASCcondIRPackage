@@ -6,12 +6,11 @@ logistic_meta=function(res){
   phecode.keep=table(res$phecode)
   phecode.keep=names(phecode.keep)[phecode.keep>1]
   res=data.frame(res)
-  res = res %>%
-    filter(phecode %in% phecode.keep)
+  res = res %>% dplyr::filter(phecode %in% phecode.keep)
   res.meta=NULL
   for(pp in phecode.keep){
     tryCatch({
-      junk=filter(res,phecode==pp,post_period==90)
+      junk=dplyr::filter(res,phecode==pp,post_period==90)
       sigmap=fisher(junk$pval)
       res.rma=rma(yi=junk$beta,
                   sei=junk$se,
@@ -27,7 +26,7 @@ logistic_meta=function(res){
                                                  "post_period"=90))
     },error=function(e){NA})
     tryCatch({
-      junk1=filter(res,phecode==pp,post_period==180)
+      junk1=dplyr::filter(res,phecode==pp,post_period==180)
       sigmap1=fisher(junk1$pval)
       res.rma1=rma(yi=junk1$beta,
                    sei=junk1$se,

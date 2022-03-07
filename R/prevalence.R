@@ -15,21 +15,21 @@ prevalence = function(summary.dcrt,
   }
 
   if(aa==1){
-    summary.tmp=filter(summary.dcrt,
+    summary.tmp=dplyr::filter(summary.dcrt,
                        age>18,
                        age<=49,
                        period==tt,
                        hospital_flag==hosp)
     age="18to49"
   }else if(aa==2){
-    summary.tmp=filter(summary.dcrt,
+    summary.tmp=dplyr::filter(summary.dcrt,
                        age>49,
                        age<=69,
                        period==tt,
                        hospital_flag==hosp)
     age="49to69"
   } else{
-    summary.tmp=filter(summary.dcrt,
+    summary.tmp=dplyr::filter(summary.dcrt,
                        age>69,
                        period==tt,
                        hospital_flag==hosp)
