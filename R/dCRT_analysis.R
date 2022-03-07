@@ -6,7 +6,7 @@ conditional_testing = function(summary.dcrt,
                                comorbid){
 res=NULL
 res.ML=NULL
-  
+
 if(time.period==90){
   res.out.final=res.out.90.final
 }else if(time.period==180){
@@ -14,30 +14,30 @@ if(time.period==90){
 }
 
 if(aa==1){
-  summary.tmp=filter(summary.dcrt,
+  summary.tmp=dplyr::filter(summary.dcrt,
                      age>18,
                      age<=49,
                      period==tt)
   age="18to49"
 }else if(aa==2){
-  summary.tmp=filter(summary.dcrt,
+  summary.tmp=dplyr::filter(summary.dcrt,
                      age>49,
                      age<=69,
                      period==tt)
   age="49to69"
 } else{
-  summary.tmp=filter(summary.dcrt,
+  summary.tmp=dplyr::filter(summary.dcrt,
                      age>69,
                      period==tt)
   age="69plus"
 }
 summary.tmp=as.matrix(summary.tmp)
 rownames(summary.tmp)=summary.tmp[,"patient_num"]
-    
+
 # select comorbid combo
-pat1=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[1]]==comorbid[cc,1]]       
-pat2=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]]       
-pat3=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]]       
+pat1=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[1]]==comorbid[cc,1]]
+pat2=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]]
+pat3=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]]
 
 pat.keep=as.character(intersect(intersect(intersect(pat1,pat2),pat3),summary.tmp[,"patient_num"]))
 pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
@@ -49,7 +49,7 @@ if(length(pat.keep)>250 & (0.02*length(pat.keep)<=sum(as.numeric(summary.tmp[pat
 summary.tmp=summary.tmp[pat.keep,]
 res.out.tmp=res.out.final[pat.keep,]
 res.conf.tmp=res.conf.final[pat.keep,]
-  
+
 X = as.matrix(res.conf.tmp)
 Z = as.matrix(res.out.tmp)
 
@@ -92,7 +92,7 @@ if(fit.glm$coefficients["A_junk",4]<0.05){
 
 print('starting confounding analysis')
 for(zz in index.keep.Z.filter$zz){
- 
+
 tryCatch({
 index = index.keep.Z[zz]
 index = as.character(index)
@@ -145,13 +145,13 @@ t = (proc.time() - t)[3]
 
 meth = method
 if(typeof(meth) == "list"){
-  
+
   # point estimate of beta:
   betas = tryCatch(Estimate(Z.tmp[,index],as.numeric(A),meth),error= function(e){0})
-  
+
   # 95% confidence interval of beta by the boostrap:
   bb = Boostrap(Z.tmp[,index],as.numeric(A),meth,B=3000)
-  
+
   if(betas != 0){
     res.ML=rbind.data.frame(res.ML,
                          cbind.data.frame("method"="DML",
@@ -230,7 +230,7 @@ testing.output[[3]]=res.ML
 testing.output[[4]]=prev
 },error=function(e){NA})
 names(testing.output)=c("logistic","dCRT","DML","prev")
-  
+
 return(testing.output)
 
       } # end of function

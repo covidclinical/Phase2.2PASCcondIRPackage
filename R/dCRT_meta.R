@@ -7,11 +7,11 @@ dCRT_meta=function(res){
   phecode.keep=names(phecode.keep)[phecode.keep>1]
   res=data.frame(res)
   res = res %>%
-    filter(phecode %in% phecode.keep)
+    dplyr::filter(phecode %in% phecode.keep)
   res.meta=NULL
   for(pp in phecode.keep){
     tryCatch({
-      junk=filter(res,phecode==pp,post_period==90)
+      junk=dplyr::filter(res,phecode==pp,post_period==90)
       sigmap=fisher(junk$pval)
       res.meta=rbind.data.frame(res.meta,
                                 cbind.data.frame("phecode"=as.character(pp),
@@ -24,7 +24,7 @@ dCRT_meta=function(res){
                                                  "post_period"=90))
     },error=function(e){NA})
     tryCatch({
-      junk1=filter(res,phecode==pp,post_period==180)
+      junk1=dplyr::filter(res,phecode==pp,post_period==180)
       sigmap1=fisher(junk1$pval)
       res.meta=rbind.data.frame(res.meta,
                                 cbind.data.frame("phecode"=as.character(pp),
