@@ -14,16 +14,16 @@ runAnalysis <- function(dir.data, dir.repo, run.DML=T){
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
 
   # read the data
-  obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
-  summary = fread(paste0(dir.data,"Phase22all_LocalPatientSummary.csv"),stringsAsFactors = F)
+   #obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
+   #summary = fread(paste0(dir.data,"Phase22all_LocalPatientSummary.csv"),stringsAsFactors = F)
 
   ### phecode mapping
   #load(sysdata)
   ### Construct phenotype data (takes 15-30 minutes)
-  construct_conditional_matrix(dir.repo,
-                               siteid,
-                               obs,
-                               summary)
+  #construct_conditional_matrix(dir.repo,
+                         #      siteid,
+                         #      obs,
+                      #         summary)
 
   ### Load newly constructed phenotype data
   load(paste0(dir.repo, siteid, "_conditional_testing_data_phase22.Rdata"))
