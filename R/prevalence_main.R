@@ -19,7 +19,10 @@ prevalence_main=function(comorbid,
                                                                          post.period,
                                                                          comorbid,
                                                                          siteid,
-                                                                         hosp))
+                                                                         hosp,
+                                                                 res.out.90.final,
+                                                                 res.out.180.final,
+                                                                 res.conf.final))
             },error=function(e){NA})
 
           }

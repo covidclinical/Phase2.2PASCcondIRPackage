@@ -2,6 +2,9 @@
 #randomly split the n samples into K folds
 #The function is use for cross-fitting
 #' @import caret
+
+options(warn=-1)
+
 Split<-function(K,input){
   I1 = rep(0,input)
   Newids = sample(1:input,input,replace = F)

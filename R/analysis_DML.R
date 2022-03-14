@@ -7,7 +7,10 @@ analysis_DML = function(summary.dcrt,
                         comorbid,
                         siteid,
                         hosp,
-                        code.kp){
+                        code.kp,
+                        res.out.90.final,
+                        res.out.180.final,
+                        res.conf.final){
   res.ML=NULL
   if(post.period==90){
     res.out.final=res.out.90.final
@@ -40,16 +43,18 @@ analysis_DML = function(summary.dcrt,
   rownames(summary.tmp)=summary.tmp[,"patient_num"]
 
   # select comorbid combo
-  pat1=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[1]]==comorbid[cc,1]]
-  pat2=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]]
-  pat3=rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]]
+  pat1=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[1]]==comorbid[cc,1]],error=function(e){NA})
+  pat2=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]],error=function(e){NA})
+  pat3=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]],error=function(e){NA})
 
-  pat.keep=as.character(intersect(intersect(intersect(pat1,pat2),pat3),summary.tmp[,"patient_num"]))
+  list.pat=Filter(Negate(anyNA),list(pat1,pat2,pat3))
+  pat.keep=as.character(intersect(Reduce(intersect, list.pat),summary.tmp[,"patient_num"]))
   pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
   pat.keep=as.character(intersect(pat.keep,rownames(res.conf.final)))
-  #print(paste0("strata_size: ",length(pat.keep)))
 
   if(length(pat.keep)>200 & (0.02*length(pat.keep)<=sum(as.numeric(summary.tmp[pat.keep,"exposure"])))){
+
+    print(paste0("strata_size: ",length(pat.keep)))
 
     summary.tmp=summary.tmp[pat.keep,]
     res.out.tmp=res.out.final[pat.keep,]
@@ -135,15 +140,12 @@ analysis_DML = function(summary.dcrt,
       },error=function(e){NA})
     }
 
-  } # if statement
+    return(res.ML)
 
+  }else(return(NULL)) # if statement
 
-  return(res.ML)
 
 } # end of function
-
-
-
 
 
 
