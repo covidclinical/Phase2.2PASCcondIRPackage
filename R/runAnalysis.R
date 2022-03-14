@@ -6,7 +6,7 @@
 #' @export
 #' @param dir.data path of input data (string)
 #' @param dir.repo path of output data (string)
-#' @param run.DML model to run, TRUE by default
+#' @param run.DML whether or not to run GBM model, TRUE by default
 #' @import data.table
 runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
@@ -14,8 +14,8 @@ runAnalysis <- function(dir.data, dir.repo, run.DML=T){
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
 
   # read the data
-  obs = fread(paste0(dir.data,"Phase22all_LocalPatientObservations.csv"),stringsAsFactors = F)
-  summary = fread(paste0(dir.data,"Phase22all_LocalPatientSummary.csv"),stringsAsFactors = F)
+   obs = fread(paste0(dir.data,"LocalPatientObservations.csv"),stringsAsFactors = F)
+   summary = fread(paste0(dir.data,"LocalPatientSummary.csv"),stringsAsFactors = F)
 
   ### phecode mapping
   #load(sysdata)
@@ -30,7 +30,10 @@ runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   comorbid=expand.grid(0:1,0:1,0:1)
   colnames(comorbid)=c("250.2","278.1","401")
-  output = as.list(NULL)
+
+  #files=list.files(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/"))
+  #files=files[grepl(".R",files)]
+  #invisible(sapply(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/",files), function(x) tryCatch(source(x),error=function(e) NA)))
 
   prevalence_main(comorbid,
                   summary.dcrt,

@@ -12,7 +12,7 @@ conditional_testing_dCRT = function(comorbid,
         for(post.period in c(90,180)){
           for(hosp in c(0,1)){
             tryCatch({
-              print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
+              #print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
               res.dCRT=rbind.data.frame(res.dCRT,
                                                       analysis_dCRT(summary.dcrt,
                                                                          tt,
@@ -22,7 +22,10 @@ conditional_testing_dCRT = function(comorbid,
                                                                          comorbid,
                                                                          siteid,
                                                                          hosp,
-                                                                    as.character(phecode.pass$phecode[phecode.pass$post_period==post.period])))
+                                                                    as.character(phecode.pass$phecode[phecode.pass$post_period==post.period]),
+                                                                    res.out.90.final,
+                                                                    res.out.180.final,
+                                                                    res.conf.final))
             },error=function(e){NA})
 
           }

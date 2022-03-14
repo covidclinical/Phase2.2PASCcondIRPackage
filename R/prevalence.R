@@ -6,7 +6,10 @@ prevalence = function(summary.dcrt,
                       post.period,
                       comorbid,
                       siteid,
-                      hosp){
+                      hosp,
+                      res.out.90.final,
+                      res.out.180.final,
+                      res.conf.final){
 
   if(post.period==90){
     res.out.final=res.out.90.final
@@ -57,10 +60,12 @@ prevalence = function(summary.dcrt,
   pat.keep=as.character(intersect(Reduce(intersect, list.pat),summary.tmp[,"patient_num"]))
   pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
   pat.keep=as.character(intersect(pat.keep,rownames(res.conf.final)))
-  print(paste0("strata_size: ",length(pat.keep)))
 
-  ######## BUG HERE else?
-  if(length(pat.keep)>200 & (0.02*length(pat.keep)<=sum(as.numeric(summary.tmp[pat.keep,"exposure"])))){
+
+
+  if(length(pat.keep)>100 & (0.02*length(pat.keep)<=sum(as.numeric(summary.tmp[pat.keep,"exposure"])))){
+
+    print(paste0("strata_size: ",length(pat.keep)))
 
     summary.tmp=summary.tmp[pat.keep,]
     res.out.tmp=res.out.final[pat.keep,]
@@ -68,7 +73,6 @@ prevalence = function(summary.dcrt,
 
     X = (res.conf.tmp)
     Z = as.matrix(res.out.tmp)
-
 
     prev_Z=apply(Z,MARGIN = 2,mean)
     index.keep.Z = which(prev_Z > 0.01)
@@ -106,7 +110,6 @@ prevalence = function(summary.dcrt,
     prev_Z_covid=apply(Z[id.covid,],MARGIN = 2,mean)
     prev_X_covid =apply(X[id.covid,],MARGIN=2,mean)
 
-
     prev_X_covid=data.frame("phecode"=names(prev_X_covid),
                             "cohort"="covid",
                             "setting"="baseline",
@@ -116,7 +119,7 @@ prevalence = function(summary.dcrt,
                             "hospital_flag"=hosp,
                             "comorbid"=paste0("T2D_",comorbid[cc,1],"_obesity_",comorbid[cc,2],"_hyp_",comorbid[cc,3]),
                             "prev"=prev_X_covid,
-                            "n"=nrow(Z))
+                            "n"=nrow(Z[id.covid,]))
     prev_Z_covid=data.frame("phecode"=names(prev_Z_covid),
                             "cohort"="covid",
                             "setting"="post",
@@ -132,6 +135,6 @@ prevalence = function(summary.dcrt,
                           prev)
 
     return(prev)
-  }else{print("Sample size is too small")}
+  }else{return(NULL)}
 
 }
