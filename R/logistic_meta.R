@@ -1,6 +1,12 @@
+#' @import data.table
 #' @import dplyr
+#' @import caret
+#' @import glmnet
 #' @import metafor
 #' @import poolr
+#' @import e1071
+#' @import gbm
+#' @import nnet
 logistic_meta=function(res){
 
   phecode.keep=table(res$phecode)

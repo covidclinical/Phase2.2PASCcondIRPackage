@@ -11,7 +11,7 @@ runAnalysis(dir.data, dir.repo, run.DML = T)
 
 \item{dir.repo}{path of output data (string)}
 
-\item{run.DML}{model to run, TRUE by default}
+\item{run.DML}{whether or not to run GBM model, TRUE by default}
 }
 \value{
 NULL. Result files are written out to the \code{conditional_testing_results} directory.

@@ -1,4 +1,12 @@
+#' @import data.table
 #' @import dplyr
+#' @import caret
+#' @import glmnet
+#' @import metafor
+#' @import poolr
+#' @import e1071
+#' @import gbm
+#' @import nnet
 #' @importFrom stats glm as.formula p.adjust predict quantile rbinom rnorm sd uniroot
 logistic_prescreen = function(summary.dcrt,
                               tt,

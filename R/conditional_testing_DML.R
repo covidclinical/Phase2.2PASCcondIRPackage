@@ -1,3 +1,12 @@
+#' @import data.table
+#' @import dplyr
+#' @import caret
+#' @import glmnet
+#' @import metafor
+#' @import poolr
+#' @import e1071
+#' @import gbm
+#' @import nnet
 conditional_testing_DML = function(comorbid,
                                     summary.dcrt,
                                     siteid,

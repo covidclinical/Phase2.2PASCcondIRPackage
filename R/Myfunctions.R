@@ -8,10 +8,16 @@
 # M = 50000: Number of resampling if needed
 # MC_free: whether to use resampling-free d0CRT or dICRT
 # Libraries needed: glmnet, dplyr, randomForest, e1071
-#' @import glmnet
+#' @import data.table
 #' @import dplyr
-#' @import randomForest
+#' @import caret
+#' @import glmnet
+#' @import metafor
+#' @import poolr
 #' @import e1071
+#' @import gbm
+#' @import nnet
+#' @import randomForest
 dCRT<-function(A, Z, X, mean_Z,
                Gen_Z = NULL,
                model = 'Binomial_lasso', k = NULL, M = 5000, RF.num.trees = c(100, 30),

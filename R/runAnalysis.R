@@ -8,6 +8,15 @@
 #' @param dir.repo path of output data (string)
 #' @param run.DML whether or not to run GBM model, TRUE by default
 #' @import data.table
+#' @import dplyr
+#' @import caret
+#' @import glmnet
+#' @import metafor
+#' @import poolr
+#' @import e1071
+#' @import gbm
+#' @import nnet
+
 runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   # create output result folder
