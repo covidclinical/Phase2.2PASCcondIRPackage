@@ -26,7 +26,8 @@
 runAnalysis <- function(dir.data, dir.repo, siteid, run.DML=T){
 
   # create output result folder
-  dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
+   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
+   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results/",siteid,"_DML_null_distribution"))
 
   # read the data
    obs = fread(paste0(dir.data,"LocalPatientObservations.csv"),stringsAsFactors = F)
