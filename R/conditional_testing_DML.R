@@ -21,7 +21,7 @@ conditional_testing_DML = function(comorbid,
         for(post.period in c(90,180)){
           for(hosp in c(0,1)){
             tryCatch({
-              print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
+             # print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
               res.DML=rbind.data.frame(res.DML,
                                        analysis_DML(summary.dcrt,
                                                    tt,

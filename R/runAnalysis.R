@@ -17,7 +17,12 @@
 #' @import gbm
 #' @import nnet
 
-runAnalysis <- function(dir.data, dir.repo, run.DML=T){
+# files=list.files(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/"))
+# files=files[grepl(".R",files)]
+# invisible(sapply(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/",files), function(x) tryCatch(source(x),error=function(e) NA)))
+
+
+runAnalysis <- function(dir.data, dir.repo, siteid, run.DML=T){
 
   # create output result folder
   dir.create(paste0(dir.repo,siteid,"_conditional_testing_results"))
@@ -39,10 +44,6 @@ runAnalysis <- function(dir.data, dir.repo, run.DML=T){
 
   comorbid=expand.grid(0:1,0:1,0:1)
   colnames(comorbid)=c("250.2","278.1","401")
-
-  #files=list.files(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/"))
-  #files=files[grepl(".R",files)]
-  #invisible(sapply(paste0("~/Documents/GitHub/Phase2.2PASCcondIRPackage/R/",files), function(x) tryCatch(source(x),error=function(e) NA)))
 
   prevalence_main(comorbid,
                   summary.dcrt,

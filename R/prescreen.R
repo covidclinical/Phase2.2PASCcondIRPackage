@@ -21,7 +21,7 @@ prescreen=function(comorbid,
         for(post.period in c(90,180)){
           for(hosp in c(0,1)){
             tryCatch({
-              print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
+              #print(paste0(siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period))
               res.logistic.prescreen=rbind.data.frame(res.logistic.prescreen,
                                                       logistic_prescreen(summary.dcrt,
                                                                          tt,
