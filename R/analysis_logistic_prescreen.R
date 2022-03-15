@@ -102,7 +102,8 @@ logistic_prescreen = function(summary.dcrt,
                                                               "comorbid"=paste0("T2D_",comorbid[cc,1],"_obesity_",comorbid[cc,2],"_hyp_",comorbid[cc,3]),
                                                               "beta"=fit.glm$coefficients["A_junk",1],
                                                               "se"=fit.glm$coefficients["A_junk",2],
-                                                              "pval"=fit.glm$coefficients["A_junk",4]))
+                                                              "pval"=fit.glm$coefficients["A_junk",4],
+                                                              "n"=nrow(junk)))
 
       },error=function(e){NA})
     }

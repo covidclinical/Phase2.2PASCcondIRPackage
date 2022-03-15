@@ -8,14 +8,15 @@ PASC Conditional Independence Testing
 This package implements conditional independence testing procedures to
 identify codified concepts related to prior exposure to SARS-CoV-2 in
 4CE Phase2.2 Data. Running this package necessitates refreshed Phase2.2
-data to Feb 1, 2022 inclusive of all patient cohorts the 4CE Consortium.
+data up to Feb 1, 2022 inclusive of all patient cohorts.
 
 4CE analysts at each participating healthcare system can follow the
 steps described bellow to run the analysis locally, using their
-healthcare system’s 2.2 data. The summarized results are then shared and
-combined with those obtained from other healthcare systems. Those
-phenotype conditional testing results regroup PheCode, beta coefficient,
-standard errors, p-values, and prevalence estimates.
+healthcare system’s 2.2 data. This version of the package was not built
+for Docker. The summarized results are then shared and combined with
+those obtained from other healthcare systems. Those phenotype
+conditional testing results regroup PheCode, beta coefficient, standard
+errors, p-values, and prevalence estimates.
 
 ### 1. Install the package
 
@@ -23,19 +24,19 @@ Install the development version of **Phase2.2PASCcondIRPackage** from
 GitHub using remotes:
 
 ``` r
-remotes::install_github('covidclinical/Phase2.2PASCcondIRPackage',
-                        upgrade = FALSE)
+remotes::install_github('covidclinical/Phase2.2PASCcondIRPackage', upgrade = FALSE)
 library(Phase2.2PASCcondIRPackage)
 ```
 
 ### 2. Run the Analysis
 
-Please note that the analysis can take up to two days to run.
+Please note that the analysis can take up to two days to run, depending
+on your sample size.
 
 ``` r
-siteid=""     # specify the site ID (capital letters)
-dir.data=""   # specify the input data directory, where the phase 2.2 data is saved
-dir.repo=""   # specify the output data directory, where the results will be saved
+dir.data = ""   # specify the input data directory, where the phase 2.2 data is saved
+dir.repo = ""   # specify the output data directory, where the results will be saved
+siteid = ""     # specify the site ID (capital letters)
 
 # run the analysis
 runAnalysis(dir.data, dir.repo, siteid, run.DML=T)

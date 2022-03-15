@@ -79,7 +79,8 @@ analysis_DML = function(summary.dcrt,
     index.keep.X <- which(prev_X > 0.025)
     X <- X[,index.keep.X]
     X=as.matrix(X)
-
+    null.dist=as.list(index.keep.Z)
+    names(null.dist)=(index.keep.Z)
     for(zz in 1:length(index.keep.Z)){
 
       tryCatch({
@@ -102,7 +103,7 @@ analysis_DML = function(summary.dcrt,
         ## Third filtering: down-sample Y=0 (1:10)
         id.1 = rownames(Z.tmp)[Z.tmp[,index]==1]
         set.seed(2022)
-        id.2 = sample(rownames(Z.tmp)[Z.tmp[,index]==0],min(length(id.1)*5,nrow(Z.tmp)-length(id.1)))
+        id.2 = sample(rownames(Z.tmp)[Z.tmp[,index]==0],min(length(id.1)*10,nrow(Z.tmp)-length(id.1)))
         X.tmp=X.tmp[c(id.1,id.2),]
         Z.tmp=Z.tmp[c(id.1,id.2),]
         A=A[c(id.1,id.2)]
@@ -140,6 +141,7 @@ analysis_DML = function(summary.dcrt,
                                                      "ci.95L"=bb["2.5%"],
                                                      "ci.95U"=bb["97.5%"],
                                                      "n"=nrow(Z.tmp)))
+            null.dist[[as.character(index)]]=meth
           }
         }
 
@@ -147,6 +149,18 @@ analysis_DML = function(summary.dcrt,
 
       },error=function(e){NA})
     }
+
+    res.null.dist=list("siteid"=siteid,
+                       "method"="DML",
+                       "age"=age,
+                       "period"=tt,
+                       "post_period"=post.period,
+                       "hospital_flag"=hosp,
+                       "comorbid"=paste0("T2D_",comorbid[cc,1],"_obesity_",comorbid[cc,2],"_hyp_",comorbid[cc,3]),
+                       "model"="gbm",
+                       "null.dist"=null.dist)
+    save(res.null.dist,
+         file=paste0(dir.repo,siteid,"_conditional_testing_results/",siteid,"_DML_null_distribution/",siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_hosp_",hosp,"_",post.period,".Rdata"))
 
     return(res.ML)
 

@@ -105,7 +105,7 @@ analysis_dCRT = function(summary.dcrt,
         ## Third filtering: down-sample Y=0 (1:10)
         id.1 = rownames(Z.tmp)[Z.tmp[,index]==1]
         set.seed(2022)
-        id.2 = sample(rownames(Z.tmp)[Z.tmp[,index]==0],min(length(id.1)*5,nrow(Z.tmp)-length(id.1)))
+        id.2 = sample(rownames(Z.tmp)[Z.tmp[,index]==0],min(length(id.1)*10,nrow(Z.tmp)-length(id.1)))
         X.tmp=X.tmp[c(id.1,id.2),]
         Z.tmp=Z.tmp[c(id.1,id.2),]
         A=A[c(id.1,id.2)]
@@ -129,7 +129,8 @@ analysis_dCRT = function(summary.dcrt,
                                                 "comorbid"=paste0("T2D_",comorbid[cc,1],"_obesity_",comorbid[cc,2],"_hyp_",comorbid[cc,3]),
                                                 "model"="Binomial_lasso",
                                                 "k"=0,
-                                                "pval"=d0CRT_result$pvl))
+                                                "pval"=d0CRT_result$pvl,
+                                                "n"=nrow(Z.tmp)))
         },error=function(e){NA})
       },error=function(e){NA})
     }
