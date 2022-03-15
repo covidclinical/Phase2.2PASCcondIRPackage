@@ -30,9 +30,7 @@ library(Phase2.2PASCcondIRPackage)
 
 ### 2. Run the Analysis
 
-First double check that your Phase2.2. data is named as "LocalPatientSummary.csv" and "LocalPatientObservations.csv". 
-Then run the R code below after you have filled in the 3 variables. 
-Please note that the analysis can take up to three days to run.
+Please note that the analysis can take up to two days to run.
 
 ``` r
 siteid=""     # specify the site ID (capital letters)
@@ -40,7 +38,7 @@ dir.data=""   # specify the input data directory, where the phase 2.2 data is sa
 dir.repo=""   # specify the output data directory, where the results will be saved
 
 # run the analysis
-runAnalysis(dir.data, dir.repo)
+runAnalysis(dir.data, dir.repo, siteid, run.DML=T)
 ```
 
 ### 3. Submit the results
