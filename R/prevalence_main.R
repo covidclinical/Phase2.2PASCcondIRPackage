@@ -11,7 +11,10 @@
 prevalence_main=function(comorbid,
                    summary.dcrt,
                    siteid,
-                   dir.repo){
+                   dir.repo,
+                   res.out.90.final,
+                   res.out.180.final,
+                   res.conf.final){
 
   res.prev=NULL
   for(tt in 1:3){

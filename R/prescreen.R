@@ -11,7 +11,10 @@
 prescreen=function(comorbid,
                    summary.dcrt,
                    siteid,
-                   dir.repo){
+                   dir.repo,
+                   res.out.90.final,
+                   res.out.180.final,
+                   res.conf.final){
 
   ### Logistic prescreening
   res.logistic.prescreen=NULL

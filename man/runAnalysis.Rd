@@ -11,6 +11,8 @@ runAnalysis(dir.data, dir.repo, siteid, run.DML = T)
 
 \item{dir.repo}{path of output data (string)}
 
+\item{siteid}{your 4CE site id (string)}
+
 \item{run.DML}{whether or not to run GBM model, TRUE by default}
 }
 \value{

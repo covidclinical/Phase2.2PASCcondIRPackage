@@ -6,6 +6,7 @@
 #' @export
 #' @param dir.data path of input data (string)
 #' @param dir.repo path of output data (string)
+#' @param siteid your 4CE site id (string)
 #' @param run.DML whether or not to run GBM model, TRUE by default
 #' @import data.table
 #' @import dplyr
@@ -48,24 +49,36 @@ runAnalysis <- function(dir.data, dir.repo, siteid, run.DML=T){
   prevalence_main(comorbid,
                   summary.dcrt,
                   siteid,
-                  dir.repo)
+                  dir.repo,
+                  res.out.90.final,
+                  res.out.180.final,
+                  res.conf.final)
 
   phecode.pass=prescreen(comorbid,
                          summary.dcrt,
                          siteid,
-                         dir.repo)
+                         dir.repo,
+                         res.out.90.final,
+                         res.out.180.final,
+                         res.conf.final)
 
   phecode.pass.dCRT=conditional_testing_dCRT(comorbid,
                                              summary.dcrt,
                                              siteid,
                                              dir.repo,
-                                             phecode.pass)
+                                             phecode.pass,
+                                             res.out.90.final,
+                                             res.out.180.final,
+                                             res.conf.final)
   if(run.DML==TRUE){
     conditional_testing_DML(comorbid,
                             summary.dcrt,
                             siteid,
                             dir.repo,
-                            phecode.pass.dCRT)
+                            phecode.pass.dCRT,
+                            res.out.90.final,
+                            res.out.180.final,
+                            res.conf.final)
 
   }
 

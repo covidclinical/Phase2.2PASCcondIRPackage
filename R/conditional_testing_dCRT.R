@@ -11,7 +11,10 @@ conditional_testing_dCRT = function(comorbid,
                                     summary.dcrt,
                                     siteid,
                                     dir.repo,
-                                    phecode.pass){
+                                    phecode.pass,
+                                    res.out.90.final,
+                                    res.out.180.final,
+                                    res.conf.final){
 
   ### Logistic prescreening
   res.dCRT=NULL
