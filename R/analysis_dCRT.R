@@ -56,6 +56,10 @@ analysis_dCRT = function(summary.dcrt,
   pat2=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]],error=function(e){NA})
   pat3=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]],error=function(e){NA})
 
+  if(is.na(pat1)==TRUE | is.na(pat2)==TRUE | is.na(pat3)==TRUE){
+    return(NULL)
+  }else{
+
   list.pat=Filter(Negate(anyNA),list(pat1,pat2,pat3))
   pat.keep=as.character(intersect(Reduce(intersect, list.pat),summary.tmp[,"patient_num"]))
   pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
@@ -88,9 +92,16 @@ analysis_dCRT = function(summary.dcrt,
       tryCatch({
         index = index.keep.Z[zz]
         index = as.character(index)
+        phe.trunct=strsplit(index,"[.]")[[1]][1]
 
-        if(index %in% colnames(X)){
-          keep.id=rownames(X)[X[,index]==0]
+        if(sum(grepl(phe.trunct,colnames(X)))>0){
+          phe.trunct=which(grepl(phe.trunct,colnames(X)))
+          if(length(phe.trunct)>1){
+            poo=rowSums(X[,phe.trunct])
+            keep.id=rownames(X)[poo==0]
+            }else{
+          keep.id=rownames(X)[X[,phe.trunct]==0]
+            }
           X.tmp=X[keep.id,]
           A = as.numeric(summary.tmp[keep.id,"exposure"])
           names(A)=keep.id
@@ -137,7 +148,7 @@ analysis_dCRT = function(summary.dcrt,
     return(res)
   }else{return(NULL)} # if statement
 
-
+}
 
 } # end of function
 
