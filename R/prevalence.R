@@ -65,7 +65,7 @@ prevalence = function(summary.dcrt,
   pat2=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]],error=function(e){NA})
   pat3=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]],error=function(e){NA})
 
-  if(is.na(pat1)==TRUE | is.na(pat2)==TRUE | is.na(pat3)==TRUE){
+  if(sum(is.na(pat1))>0 | sum(is.na(pat2))>0  | sum(is.na(pat3))>0 ){
     return(NULL)
   }else{
 
