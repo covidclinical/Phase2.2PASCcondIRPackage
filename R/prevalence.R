@@ -74,8 +74,6 @@ prevalence = function(summary.dcrt,
   pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
   pat.keep=as.character(intersect(pat.keep,rownames(res.conf.final)))
 
-
-
   if(length(pat.keep)>100 & (0.02*length(pat.keep)<=sum(as.numeric(summary.tmp[pat.keep,"exposure"])))){
 
     print(paste0("strata_size: ",length(pat.keep)))
