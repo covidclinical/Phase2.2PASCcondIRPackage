@@ -58,6 +58,6 @@ runAnalysis(dir.data, dir.repo, siteid, run.DML=T)
 
 Your results will be saved under the path that you specify in
 `dir.repo`, as an .Rdata file. Please share the results with @Harrison
-and @Clara-Lea via the Slack channel #post-acute-sequelae.
+and @Clara-Lea via Slack.
 
 Thank you very much for your contribution!
