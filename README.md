@@ -24,6 +24,7 @@ Install the development version of **Phase2.2PASCcondIRPackage** from
 GitHub using remotes:
 
 ``` r
+library(remotes)
 remotes::install_github('covidclinical/Phase2.2PASCcondIRPackage', upgrade = FALSE)
 library(Phase2.2PASCcondIRPackage)
 ```

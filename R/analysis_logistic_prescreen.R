@@ -55,6 +55,10 @@ logistic_prescreen = function(summary.dcrt,
   pat2=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[2]]==comorbid[cc,2]],error=function(e){NA})
   pat3=tryCatch(rownames(res.conf.final)[res.conf.final[,colnames(comorbid)[3]]==comorbid[cc,3]],error=function(e){NA})
 
+  if(is.na(pat1)==TRUE | is.na(pat2)==TRUE | is.na(pat3)==TRUE){
+    return(NULL)
+    }else{
+
   list.pat=Filter(Negate(anyNA),list(pat1,pat2,pat3))
   pat.keep=as.character(intersect(Reduce(intersect, list.pat),summary.tmp[,"patient_num"]))
   pat.keep=as.character(intersect(pat.keep,rownames(res.out.final)))
@@ -115,4 +119,5 @@ logistic_prescreen = function(summary.dcrt,
     #
     return(index.keep.Z.filter)
   }else{return(NULL)}
+    }
 } # end of function
