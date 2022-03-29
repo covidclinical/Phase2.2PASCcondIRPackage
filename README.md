@@ -57,7 +57,8 @@ runAnalysis(dir.data, dir.repo, siteid, run.DML=T)
 <!-- #### 2. Alternatively, you can submit the results via Slack.  -->
 
 Your results will be saved under the path that you specify in
-`dir.repo`, as an .Rdata file. Please share the results with @Harrison
-and @Clara-Lea via Slack.
+`dir.repo`, as an folder titled "SITEID_conditional_testing_results"
+with .Rdata files inside. Please compress the folder into a zip format
+and share the results with @Harrison and @Clara-Lea via Slack.
 
 Thank you very much for your contribution!
