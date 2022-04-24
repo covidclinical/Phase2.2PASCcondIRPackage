@@ -118,6 +118,6 @@ logistic_prescreen = function(summary.dcrt,
     #                  siteid,"_tt_",tt,"_aa_",aa,"_cc_",cc,"_",post.period,".Rdata"))
     #
     return(index.keep.Z.filter)
-  }else{return(NULL)}
+  }else{stop(paste0("length of path.keep = ",length(path.keep)))}
     }
 } # end of function
